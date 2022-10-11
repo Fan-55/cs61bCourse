@@ -28,6 +28,13 @@ public class SLList {
         size = 1;
     }
 
+    public SLList(int[] a) {
+        sentinel = new IntNode(63, null);
+        for (int item : a) {
+            addFirst(item);
+        }
+    }
+
     public void addFirst(int x) {
         sentinel.next = new IntNode(x, sentinel.next);
         size++;
@@ -42,6 +49,12 @@ public class SLList {
         size++;
     }
 
+    public void deleteFirst() {
+        if (size > 0) {
+            sentinel.next = sentinel.next.next;
+            size--;
+        }
+    }
 
 //    recursive way to get the size of SLList
 //    private static int size(IntNode p) {
@@ -65,7 +78,11 @@ public class SLList {
         L.addFirst(10);
         L.addFirst(5);
         L.addLast(20);
+        /// 5 -> 10 -> 15 -> 20
         System.out.println(L.getFirst());
         System.out.println(L.size());
+        L.deleteFirst();
+        System.out.println(L.size());
+
     }
 }
