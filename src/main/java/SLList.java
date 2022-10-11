@@ -12,6 +12,8 @@ public class SLList {
 
     /// The first node (if it exists) is at sentinel.next
     private IntNode sentinel;
+
+    /// caching way to get the size of SLList
     private int size;
 
     /// create empty SLList
@@ -40,6 +42,8 @@ public class SLList {
         size++;
     }
 
+
+//    recursive way to get the size of SLList
 //    private static int size(IntNode p) {
 //        if (p.next == null) {
 //            return 1;
