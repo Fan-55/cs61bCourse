@@ -5,7 +5,7 @@
  * size: The number of items in the list should be size.
  * getLast: The last item is at position (size - 1)
  */
-public class AList<Item> {
+public class AList<Item> implements List61B<Item> {
     private Item[] items;
     private int size;
 
@@ -20,6 +20,7 @@ public class AList<Item> {
         items = a;
     }
 
+    @Override
     public void addLast(Item x) {
         if (size == items.length) {
             resize(size + 1);
@@ -28,14 +29,17 @@ public class AList<Item> {
         size += 1;
     }
 
+    @Override
     public Item getLast() {
         return items[size - 1];
     }
 
+    @Override
     public int size() {
         return size;
     }
-
+    
+    @Override
     public Item get(int i) {
         return items[i];
     }
