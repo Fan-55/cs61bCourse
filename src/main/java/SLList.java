@@ -1,88 +1,87 @@
-public class SLList {
-    /// IntNode class is static because it never uses SLList's instance methods or variables.
-    private static class IntNode {
-        public int item;
-        public IntNode next;
+public class SLList<Item> implements List61B<Item> {
+    private class Node {
+        public Item item;
+        public Node next;
 
-        public IntNode(int i, IntNode n) {
+        public Node(Item i, Node n) {
             item = i;
             next = n;
         }
     }
 
     /// The first node (if it exists) is at sentinel.next
-    private IntNode sentinel;
+    private Node sentinel;
 
     /// caching way to get the size of SLList
     private int size;
 
     /// create empty SLList
     public SLList() {
-        sentinel = new IntNode(63, null);
+        sentinel = new Node(null, null);
         size = 0;
     }
 
-    public SLList(int x) {
-        sentinel = new IntNode(63, null);
-        sentinel.next = new IntNode(x, null);
+    public SLList(Item x) {
+        sentinel = new Node(null, null);
+        sentinel.next = new Node(x, null);
         size = 1;
     }
 
-    public SLList(int[] a) {
-        sentinel = new IntNode(63, null);
-        for (int item : a) {
-            addFirst(item);
-        }
-    }
-
-    public void addFirst(int x) {
-        sentinel.next = new IntNode(x, sentinel.next);
-        size++;
-    }
-
-    public void addLast(int x) {
-        IntNode p = sentinel;
+    @Override
+    public void addLast(Item x) {
+        Node p = sentinel;
         while (p.next != null) {
             p = p.next;
         }
-        p.next = new IntNode(x, null);
+        p.next = new Node(x, null);
         size++;
     }
 
-    public void deleteFirst() {
-        if (size > 0) {
-            sentinel.next = sentinel.next.next;
-            size--;
-        }
-    }
-
-//    recursive way to get the size of SLList
-//    private static int size(IntNode p) {
-//        if (p.next == null) {
-//            return 1;
-//        }
-//        return 1 + size(p.next);
-//    }
-
+    @Override
     public int size() {
-//        return size(first);
         return size;
     }
 
-    public int getFirst() {
-        return sentinel.next.item;
+    @Override
+    public Item removeLast() {
+        Node back = getLastNode();
+        if (back == sentinel) {
+            return null;
+        }
+        Node p = sentinel;
+        while (p.next != back) {
+            p = p.next;
+        }
+        p.next = null;
+        return back.item;
     }
 
-    public static void main(String[] args) {
-        SLList L = new SLList(15);
-        L.addFirst(10);
-        L.addFirst(5);
-        L.addLast(20);
-        /// 5 -> 10 -> 15 -> 20
-        System.out.println(L.getFirst());
-        System.out.println(L.size());
-        L.deleteFirst();
-        System.out.println(L.size());
+    private Node getLastNode() {
+        Node p = sentinel;
 
+        /* Move p until it reaches the end. */
+        while (p.next != null) {
+            p = p.next;
+        }
+        return p;
+    }
+
+    @Override
+    public Item get(int i) {
+        return get(i, sentinel.next);
+    }
+
+    private Item get(int i, Node p) {
+        if (i == 0) {
+            return p.item;
+        }
+        return get(i - 1, p.next);
+    }
+
+
+    @Override
+    public Item getLast() {
+        Node back = getLastNode();
+        return back.item;
     }
 }
