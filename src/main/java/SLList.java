@@ -84,4 +84,12 @@ public class SLList<Item> implements List61B<Item> {
         Node back = getLastNode();
         return back.item;
     }
+
+    @Override
+    public void addFirst(Item x) {
+        Node oldFrontNode = sentinel.next;
+        Node newNode = new Node(x, oldFrontNode);
+        sentinel.next = newNode;
+        size += 1;
+    }
 }

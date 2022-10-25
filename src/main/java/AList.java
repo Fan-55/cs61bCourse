@@ -38,7 +38,7 @@ public class AList<Item> implements List61B<Item> {
     public int size() {
         return size;
     }
-    
+
     @Override
     public Item get(int i) {
         return items[i];
@@ -50,5 +50,22 @@ public class AList<Item> implements List61B<Item> {
         items[size - 1] = null;
         size -= 1;
         return x;
+    }
+
+    @Override
+    public void addFirst(Item x) {
+        insert(x, 0);
+    }
+
+    public void insert(Item x, int position) {
+        Item[] newItems = (Item[]) new Object[items.length + 1];
+
+        System.arraycopy(items, 0, newItems, 0, position);
+        newItems[position] = x;
+
+        System.arraycopy(items, position, newItems, position + 1, items.length - position);
+        items = newItems;
+
+        size += 1;
     }
 }
