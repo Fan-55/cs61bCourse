@@ -53,6 +53,7 @@ public class SLList<Item> implements List61B<Item> {
             p = p.next;
         }
         p.next = null;
+        size -= 1;
         return back.item;
     }
 
