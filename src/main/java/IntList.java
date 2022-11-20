@@ -7,16 +7,18 @@ public class IntList {
         rest = r;
     }
 
+    /// iterative way
     public int iterativeSize() {
-        IntList p = this;
-        int totalSize = 0;
+        int size = 0;
+        IntList p = rest;
         while (p != null) {
-            totalSize += 1;
+            size++;
             p = p.rest;
         }
-        return totalSize;
+        return size;
     }
 
+    /// recursion way
     public int size() {
         if (rest == null) {
             return 1;
