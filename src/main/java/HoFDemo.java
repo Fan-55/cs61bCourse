@@ -1,3 +1,4 @@
+// Demonstrates higher order function in Java
 public class HoFDemo {
     public static int do_twice(IntUnaryFunction f, int x) {
         return f.apply(f.apply(x));
