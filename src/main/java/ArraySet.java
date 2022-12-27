@@ -77,6 +77,25 @@ public class ArraySet<T> implements Iterable<T> {
         return returnSB.toString();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o instanceof ArraySet oas) {
+            // check sets are of the same size
+            if (oas.size != this.size) {
+                return false;
+            }
+            // check that all my items are in the other array set
+            for (T x : this) {
+                if (!oas.contains(x)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
 //        ArraySet<String> s = new ArraySet<>();
 //        s.add("horse");
@@ -90,6 +109,12 @@ public class ArraySet<T> implements Iterable<T> {
         aset.add(5);
         aset.add(23);
         aset.add(42);
+        ArraySet<Integer> aset2 = new ArraySet<>();
+        aset2.add(5);
+        aset2.add(23);
+        aset2.add(42);
+
+        System.out.println(aset.equals(aset2));
 
         System.out.println(aset.toString());
 
