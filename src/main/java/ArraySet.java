@@ -65,6 +65,18 @@ public class ArraySet<T> implements Iterable<T> {
         }
     }
 
+    @Override
+    public String toString() {
+        StringBuilder returnSB = new StringBuilder("{");
+        for (int i = 0; i < size - 1; i++) {
+            returnSB.append(items[i].toString());
+            returnSB.append(", ");
+        }
+        returnSB.append(items[size - 1]);
+        returnSB.append("}");
+        return returnSB.toString();
+    }
+
     public static void main(String[] args) {
 //        ArraySet<String> s = new ArraySet<>();
 //        s.add("horse");
@@ -78,6 +90,8 @@ public class ArraySet<T> implements Iterable<T> {
         aset.add(5);
         aset.add(23);
         aset.add(42);
+
+        System.out.println(aset.toString());
 
         /* under the hood of enhanced for loop */
         Iterator<Integer> aseer = aset.iterator();
